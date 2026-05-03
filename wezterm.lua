@@ -63,9 +63,8 @@ config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
 -- Fuente
-config.font = wezterm.font("JetBrains Mono", {
-	harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
-})
+config.font = wezterm.font("JetBrains Mono")
+config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
 config.font_size = 16.0
 
 -- Ocultar la barra de pestañas si solo hay una
@@ -111,7 +110,7 @@ config.background = {
 
 config.colors = {
 	-- Background
-	foreground = "#f3f6f9",
+	foreground = "#53d1df", --#f3f6f9",
 
 	-- Cursor
 	cursor_bg = "red",
