@@ -36,6 +36,32 @@ config.window_padding = {
 	bottom = 10,
 }
 
+-- NVim optimizaciones
+if wezterm.target_triple:find("windows") then
+	config.term = "xterm-256color"
+else
+	config.term = "wezterm"
+end
+config.enable_csi_u_key_encoding = true
+
+-- Undercurl support (LSP diagnostics, spelling)
+config.underline_thickness = 2
+config.underline_position = -2
+
+-- Scrollback
+config.scrollback_lines = 10000
+
+-- Performance
+config.max_fps = 240
+
+-- Image support
+config.enable_kitty_graphics = true
+
+-- Input handling
+config.use_dead_keys = false
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
+
 -- Fuente
 config.font = wezterm.font("JetBrains Mono", {
 	harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
@@ -64,19 +90,60 @@ config.mouse_bindings = {
 	},
 }
 
+-- Cursor
+config.default_cursor_style = "SteadyBlock"
+config.cursor_blink_rate = 500
+config.cursor_blink_ease_in = "Constant"
+config.cursor_blink_ease_out = "Constant"
+
 -- Configuración de Background
 config.background = {
 	{
 		source = {
-			File = "\\\\wsl$\\Ubuntu\\home\\pichu\\.config\\wezterm\\hacker-box.png",
+			File = wezterm.config_dir .. "/hacker-box.png",
 		},
 		hsb = {
-			brightness = 0.15,
+			brightness = 0.02,
 			saturation = 1.0,
 		},
 	},
 }
 
--- Opacidad de la ventana (0.0 a 1.0)
-config.window_background_opacity = 0.95
+config.colors = {
+	-- Background
+	foreground = "#f3f6f9",
+
+	-- Cursor
+	cursor_bg = "red",
+	cursor_fg = "#06080f",
+	cursor_border = "#e0c15a",
+
+	-- Selection
+	selection_fg = "#f3f6f9",
+	selection_bg = "#263356",
+
+	-- Normal Colors
+	ansi = {
+		"#06080f", -- black
+		"#cb7c94", -- red
+		"#b7cc85", -- green
+		"#ffe066", -- yellow
+		"#7fb4ca", -- blue
+		"#ff8dd7", -- magenta
+		"#7aa89f", -- cyan
+		"#f3f6f9", -- white
+	},
+
+	-- Bright Colors
+	brights = {
+		"#8a8fa3", -- black
+		"#de8fa8", -- red
+		"#d1e8a9", -- green
+		"#fff7b1", -- yellow
+		"#a3d4d5", -- blue
+		"#ffaeea", -- magenta
+		"#7fb4ca", -- cyan
+		"#f3f6f9", -- white
+	},
+}
 return config
