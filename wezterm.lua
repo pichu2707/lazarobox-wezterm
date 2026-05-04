@@ -18,6 +18,24 @@ config.keys = {
 			mode = "SwapWithActive",
 		}),
 	},
+	-- Dividir panel horizontalmente (uno arriba, otro abajo)
+	{
+		key = "-",
+		mods = "ALT",
+		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	-- Dividir panel verticalmente (uno a la izquierda, otro a la derecha)
+	{
+		key = "\\",
+		mods = "ALT",
+		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	-- Desactivar Ctrl+Shift+D para evitar cerrar paneles accidentalmente
+	{
+		key = "d",
+		mods = "CTRL|SHIFT",
+		action = act.DisableDefaultAssignment,
+	},
 }
 
 -- Decoraciones de ventana
