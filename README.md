@@ -1,11 +1,12 @@
-![LazaroWezTerm](./lazaro-wezterm.png)
+[LazaroWezTerm](./lazaro-wezterm.png)
 
 # 🟥 LazaroBox WezTerm
 
-````text
-[ LZBOX TERM ] :: render layer```
+```text
+[ LZBOX TERM ] :: render layer
+```
 
->A cyberpunk-inspired WezTerm configuration designed to match the LazaroBox ecosystem.
+> A cyberpunk-inspired WezTerm configuration designed to match the LazaroBox ecosystem.
 
 Optimized for color fidelity, transparency, and terminal-native workflows.
 
@@ -33,6 +34,7 @@ Smooth rendering in transparent environments
 ## Installation
 
 Clone the repository:
+
 ```bash
 git clone https://github.com/pichu2707/wezterm-javi-config ~/.config/wezterm
 ````
