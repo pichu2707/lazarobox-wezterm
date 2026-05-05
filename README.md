@@ -1,4 +1,4 @@
-[LazaroWezTerm](./lazaro-wezterm.png)
+![LazaroWezTerm](./lazaro-wezterm.png)
 
 # 🟥 LazaroBox WezTerm
 
@@ -37,7 +37,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/pichu2707/wezterm-javi-config ~/.config/wezterm
-````
+```
 
 Or manually copy:
 
