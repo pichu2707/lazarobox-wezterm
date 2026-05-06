@@ -126,41 +126,69 @@ config.background = {
 	},
 }
 
+-- Paleta Kanagawa Blur (alineada con lua/plugins/catppuccin.lua)
 config.colors = {
-	-- Background
-	foreground = "#53d1df", --#f3f6f9",
+	-- Texto principal: blue (cyan-azul) de la paleta nvim
+	foreground = "#7fb4ca",
+	background = "#191e28", -- base, por si falla la imagen de fondo
 
 	-- Cursor
-	cursor_bg = "red",
-	cursor_fg = "#06080f",
-	cursor_border = "#e0c15a",
+	cursor_bg = "#a4daa7", -- teal
+	cursor_fg = "#191e28", -- base
+	cursor_border = "#e0c15a", -- rosewater (gold)
 
-	-- Selection
-	selection_fg = "#f3f6f9",
-	selection_bg = "#263356",
+	-- Selección
+	selection_fg = "#f3f6f9", -- text
+	selection_bg = "#263356", -- lavender
 
 	-- Normal Colors
 	ansi = {
-		"#06080f", -- black
+		"#191e28", -- black     (base)
 		"#cb7c94", -- red
 		"#b7cc85", -- green
 		"#ffe066", -- yellow
 		"#7fb4ca", -- blue
-		"#ff8dd7", -- magenta
-		"#7aa89f", -- cyan
-		"#f3f6f9", -- white
+		"#c99ad6", -- magenta   (mauve / keyword)
+		"#7aa89f", -- cyan      (sky)
+		"#f3f6f9", -- white     (text)
 	},
 
 	-- Bright Colors
 	brights = {
-		"#8a8fa3", -- black
-		"#de8fa8", -- red
-		"#d1e8a9", -- green
-		"#fff7b1", -- yellow
-		"#a3d4d5", -- blue
-		"#ffaeea", -- magenta
-		"#7fb4ca", -- cyan
-		"#f3f6f9", -- white
+		"#5c6170", -- bright black   (subtext0 / gray5)
+		"#c4746e", -- bright red     (flamingo / variable)
+		"#a4daa7", -- bright green   (teal / number)
+		"#e0c15a", -- bright yellow  (rosewater / gold)
+		"#a3b5d6", -- bright blue    (sapphire)
+		"#b99bf2", -- bright magenta (pink / function)
+		"#7fb4ca", -- bright cyan    (blue)
+		"#f3f6f9", -- bright white   (text)
+	},
+
+	-- Bordes de panel para que combinen con surfaces de nvim
+	split = "#232a40", -- crust
+	tab_bar = {
+		background = "#191e28",
+		active_tab = {
+			bg_color = "#232a36", -- surface1
+			fg_color = "#7fb4ca",
+		},
+		inactive_tab = {
+			bg_color = "#191e28",
+			fg_color = "#5c6170",
+		},
+		inactive_tab_hover = {
+			bg_color = "#1c212c", -- surface0
+			fg_color = "#f3f6f9",
+		},
+		new_tab = {
+			bg_color = "#191e28",
+			fg_color = "#5c6170",
+		},
+		new_tab_hover = {
+			bg_color = "#232a36",
+			fg_color = "#a4daa7",
+		},
 	},
 }
 return config
