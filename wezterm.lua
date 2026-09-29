@@ -2,6 +2,40 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
+-- Detección de plataforma (Windows abre WSL; Linux queda igual).
+-- Se detecta sola; LAZAROBOX_OS=linux|windows la fuerza para casos raros.
+-- Cualquier otro valor se ignora para que un error tipográfico no rompa nada.
+local function detect_windows()
+	local forced = os.getenv("LAZAROBOX_OS")
+	if forced == "windows" then
+		return true
+	elseif forced == "linux" then
+		return false
+	end
+	return wezterm.target_triple:find("windows") ~= nil
+end
+
+local is_windows = detect_windows()
+
+-- Nota: en Windows, ConPTY elimina las secuencias de escape de kitty graphics
+-- y undercurl, así que imágenes y undercurl dentro de WSL no funcionan sin el
+-- multiplexado de WezTerm (fuera de alcance).
+if is_windows then
+	-- Dominio por defecto: distro WSL (override con LAZAROBOX_WSL_DISTRO)
+	local distro = os.getenv("LAZAROBOX_WSL_DISTRO")
+	if not distro or distro == "" then
+		for _, domain in ipairs(wezterm.default_wsl_domains()) do
+			if domain.distribution ~= "docker-desktop" then
+				distro = domain.distribution
+				break
+			end
+		end
+	end
+	if distro then
+		config.default_domain = "WSL:" .. distro
+	end
+end
+
 config.keys = {
 	{ key = "8", mods = "CTRL", action = act.PaneSelect },
 	{
@@ -38,8 +72,12 @@ config.keys = {
 	},
 }
 
--- Decoraciones de ventana
-config.window_decorations = "NONE"
+-- Decoraciones de ventana ("NONE" en Windows impide mover/redimensionar)
+if is_windows then
+	config.window_decorations = "RESIZE"
+else
+	config.window_decorations = "NONE"
+end
 
 -- Configuración de ventana
 config.adjust_window_size_when_changing_font_size = false
@@ -55,7 +93,7 @@ config.window_padding = {
 }
 
 -- NVim optimizaciones
-if wezterm.target_triple:find("windows") then
+if is_windows then
 	config.term = "xterm-256color"
 else
 	config.term = "wezterm"
@@ -81,7 +119,12 @@ config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
 -- Fuente
-config.font = wezterm.font("JetBrains Mono")
+if is_windows then
+	-- En Windows se instala la Nerd Font, no "JetBrains Mono" a secas
+	config.font = wezterm.font("JetBrainsMono Nerd Font")
+else
+	config.font = wezterm.font("JetBrains Mono")
+end
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
 config.font_size = 16.0
 
@@ -114,17 +157,30 @@ config.cursor_blink_ease_in = "Constant"
 config.cursor_blink_ease_out = "Constant"
 
 -- Configuración de Background
-config.background = {
-	{
-		source = {
-			File = wezterm.config_dir .. "/hacker-box.png",
+local background_image = wezterm.config_dir .. "/hacker-box.png"
+local function file_exists(path)
+	local file = io.open(path, "rb")
+	if file then
+		file:close()
+		return true
+	end
+	return false
+end
+
+-- En Windows solo se aplica si la imagen existe; en Linux siempre
+if not is_windows or file_exists(background_image) then
+	config.background = {
+		{
+			source = {
+				File = background_image,
+			},
+			hsb = {
+				brightness = 0.02,
+				saturation = 1.0,
+			},
 		},
-		hsb = {
-			brightness = 0.02,
-			saturation = 1.0,
-		},
-	},
-}
+	}
+end
 
 -- Paleta Kanagawa Blur (alineada con lua/plugins/catppuccin.lua)
 config.colors = {

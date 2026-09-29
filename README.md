@@ -36,7 +36,7 @@ Smooth rendering in transparent environments
 Clone the repository:
 
 ```bash
-git clone https://github.com/pichu2707/wezterm-javi-config ~/.config/wezterm
+git clone https://github.com/pichu2707/lazarobox-wezterm ~/.config/wezterm
 ```
 
 Or manually copy:
@@ -44,6 +44,42 @@ Or manually copy:
 ```bash
 ~/.config/wezterm/wezterm.lua
 ```
+
+### Windows (WSL)
+
+The same config works on Windows and opens your WSL distro by default.
+
+1. Install WezTerm and the [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads):
+
+```powershell
+winget install wez.wezterm
+```
+
+2. Clone the repository from PowerShell:
+
+```powershell
+git clone https://github.com/pichu2707/lazarobox-wezterm "$env:USERPROFILE\.config\wezterm"
+```
+
+3. (Optional) Pick the WSL distro. By default the first distro that is not `docker-desktop` is used:
+
+```powershell
+setx LAZAROBOX_WSL_DISTRO "Ubuntu-24.04"
+```
+
+### Platform detection
+
+The config detects Linux or Windows automatically, so the same repository works on both without changes. To force a platform, set `LAZAROBOX_OS` to `linux` or `windows` (any other value is ignored):
+
+```bash
+export LAZAROBOX_OS=linux   # Linux shell
+```
+
+```powershell
+setx LAZAROBOX_OS "windows" # Windows
+```
+
+> **Note:** on Windows, ConPTY strips kitty graphics and undercurl escape sequences, so images and undercurl inside WSL won't render without WezTerm multiplexing.
 
 ## Configuration
 
