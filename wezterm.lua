@@ -175,7 +175,7 @@ if not is_windows or file_exists(background_image) then
 				File = background_image,
 			},
 			hsb = {
-				brightness = 0.02,
+				brightness = 0.15,
 				saturation = 1.0,
 			},
 		},
