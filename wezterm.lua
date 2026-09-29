@@ -110,6 +110,10 @@ config.scrollback_lines = 10000
 -- Performance
 config.max_fps = 240
 
+-- Opacidad de las celdas con fondo propio (p.ej. nvim con fondo solido):
+-- deja ver un poco la imagen de fondo sin que distraiga al programar
+config.text_background_opacity = 0.85
+
 -- Image support
 config.enable_kitty_graphics = true
 
